@@ -1,16 +1,16 @@
 #/bin/bash
 
-echo "Building logging library"
+echo "Building common library"
 
 SUCCESS=0
 
-cd $WORKSPACE/logging
+cd $WORKSPACE/common
 mkdir -p build
 cd build
 cmake ../.
 make -j
 
 SUCCESS=$?
-echo "Done building logging library "
+echo "Done building common library "
 
 return $SUCCESS
