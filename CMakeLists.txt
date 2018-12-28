@@ -34,4 +34,10 @@ if(Boost_FOUND)
   link_directories(${Boost_LIBRARIES})
 endif()
 
+enable_testing()
+
+include_directories(logging)
+include_directories(config)
+
 add_subdirectory(logging)
+add_subdirectory(config)

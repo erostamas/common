@@ -78,7 +78,9 @@ freeStyleJob(jobname) {
     publishers {
         archiveArtifacts {
             pattern('common/build/logging/libet_logging.so, ' +
-                    'common/logging/Logging.h')
+                    'common/logging/Logging.h' +
+					'common/build/config/libet_config.so, ' +
+                    'common/config/Config.h' )
         }
     }
 }
