@@ -9,7 +9,7 @@
 #include <unordered_map>
 
 // LCOV_EXCL_START
-
+// TEST
 BOOST_LOG_ATTRIBUTE_KEYWORD(severity, "Severity", severity_level)
 
 namespace expr = boost::log::expressions;
