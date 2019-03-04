@@ -3,7 +3,7 @@ import groovy.json.*
 def jobname = "test_${BRANCH_NAME}"
 
 out.println('hello from job dsl script')
-out.println(System.getenv('WORKSPACE'))
+out.println(build.environment.get("WORKSPACE"))
 
 freeStyleJob(jobname) {
     description("""
