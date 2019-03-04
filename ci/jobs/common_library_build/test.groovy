@@ -3,7 +3,8 @@ import groovy.json.*
 def jobname = "test_${BRANCH_NAME}"
 
 out.println('hello from job dsl script')
-out.println(getBinding().getVariables()["WORKSPACE"])
+getBinding().getVariables().each{ k, v -> out.println "${k}:${v}" }
+
 
 freeStyleJob(jobname) {
     description("""
