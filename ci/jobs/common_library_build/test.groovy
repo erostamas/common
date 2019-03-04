@@ -3,6 +3,7 @@ import groovy.json.*
 def jobname = "test_${BRANCH_NAME}"
 
 sh "pwd"
+println "HELLO BELLO"
 def env = System.getenv()
 env.each{
 println it
