@@ -2,8 +2,10 @@ import groovy.json.*
 
 def jobname = "test_${BRANCH_NAME}"
 
+def out = getBinding().out
+
 sh "pwd"
-println "HELLO BELLO"
+out.println "HELLO BELLO"
 def env = System.getenv()
 env.each{
 println it
