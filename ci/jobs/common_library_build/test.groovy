@@ -7,9 +7,6 @@ env.each{
 println it
 }
 
-hudson.FilePath workspace = hudson.model.Executor.currentExecutor().getCurrentWorkspace()
-println workspace
-
 freeStyleJob(jobname) {
     description("""
         <b>Generated Job</b>
