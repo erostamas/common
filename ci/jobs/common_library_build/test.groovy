@@ -11,6 +11,12 @@ env.each{
 println it
 }
 
+node('master') {
+    stage('DSL') {
+        sh 'env'
+        jobDsl scriptText:'System.getenv().collect{println it.key println it.value}'
+    }
+}
 freeStyleJob(jobname) {
     description("""
         <b>Generated Job</b>
