@@ -2,15 +2,6 @@ import groovy.json.*
 
 def jobname = "test_${BRANCH_NAME}"
 
-def out = getBinding().out
-
-sh "pwd"
-out.println "HELLO BELLO"
-def env = System.getenv()
-env.each{
-println it
-}
-
 node('master') {
     stage('DSL') {
         sh 'env'
