@@ -2,12 +2,8 @@ import groovy.json.*
 
 def jobname = "test_${BRANCH_NAME}"
 
-node('master') {
-    stage('DSL') {
-        sh 'env'
-        jobDsl scriptText:'System.getenv().collect{println it.key println it.value}'
-    }
-}
+out.println('hello from job dsl script')
+
 freeStyleJob(jobname) {
     description("""
         <b>Generated Job</b>
