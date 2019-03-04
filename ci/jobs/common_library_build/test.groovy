@@ -2,6 +2,7 @@ import groovy.json.*
 
 def jobname = "test_${BRANCH_NAME}"
 
+sh "pwd"
 def env = System.getenv()
 env.each{
 println it
