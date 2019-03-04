@@ -1,0 +1,8 @@
+{
+"type": "record", 
+"name": "cpx",
+"fields" : [
+    {"name": "a", "type": "float"},    
+    {"name": "b", "type" : "string"}
+]
+}
