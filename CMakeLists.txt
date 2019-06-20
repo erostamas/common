@@ -43,4 +43,5 @@ include_directories(config)
 
 add_subdirectory(logging)
 add_subdirectory(config)
+add_subdirectory(communication)
 #add_subdirectory(avro)

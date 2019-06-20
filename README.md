@@ -21,7 +21,7 @@ sudo make install
 #INSTALL GMOCK
 '''
 sudo apt-get install google-mock
-cd /usr/src/gtest
+cd /usr/src/gmock
 mkdir build && cd build
 sudo cmake ../
 sudo make -j
