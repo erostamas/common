@@ -6,8 +6,8 @@ add_executable(${TESTNAME}
     TestConfig.cc)
 
 target_link_libraries(${TESTNAME}
-    gtest
-	gtest_main
+    gmock
+	gmock_main
 	pthread
 	et_config)
 

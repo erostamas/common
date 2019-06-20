@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.0)
 PROJECT(logging)
 
+set(BOOST_ROOT /usr/include/boost)
+
 # compiler and linker flags
 if ((NOT CMAKE_CXX_FLAGS) OR (CMAKE_CXX_FLAGS MATCHES "^[ \t]*$"))
   set(CXX11_FLAG "-std=c++11")
@@ -25,7 +27,7 @@ set(Boost_USE_MULTITHREADED      ON)
 set(Boost_USE_STATIC_RUNTIME    OFF)
 
 find_package(Boost
-	1.65.1
+	1.62.0
 	REQUIRED
 	COMPONENTS ${BOOST_COMPONENTS})
 
