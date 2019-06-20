@@ -20,4 +20,4 @@ INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/UdpInterface.h ${CMAKE_CURRENT_SOURCE_
 	PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
 )
 
-#add_subdirectory(test)
+add_subdirectory(test)

@@ -46,7 +46,7 @@ void init_logging(const std::string& logFilePath, const std::string& logLevelStr
 }
 
 // for testing maybe
-void init_logging(std::ostringstream& sink, const std::string& logLevelStr) {
+void init_logging(std::ostream& sink, const std::string& logLevelStr) {
     boost::log::add_common_attributes();
     boost::log::add_console_log(
 			sink,
