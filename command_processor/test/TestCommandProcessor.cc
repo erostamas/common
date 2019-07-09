@@ -13,4 +13,3 @@ TEST(TestConfig, test_x) {
     std::cout << "hello" << std::endl;
 }
 
-

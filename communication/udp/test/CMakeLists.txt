@@ -6,4 +6,5 @@ add_executable(udp_receiver_test
 
 target_link_libraries(udp_receiver_test
     et_udp
+    pthread
 )
