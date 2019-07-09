@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 PROJECT(logging)
 
 set(BOOST_ROOT /usr/include/boost)
+set(BOOST_LIBRARYDIR /usr/lib/)
 
 # compiler and linker flags
 if ((NOT CMAKE_CXX_FLAGS) OR (CMAKE_CXX_FLAGS MATCHES "^[ \t]*$"))
@@ -22,7 +23,7 @@ endif()
 #3pp
 set(BOOST_COMPONENTS log system thread)
 set(BOOST_LIBS boost_log boost_system boost_thread)
-set(Boost_USE_STATIC_LIBS        ON)
+set(Boost_USE_STATIC_LIBS        OFF)
 set(Boost_USE_MULTITHREADED      ON)
 set(Boost_USE_STATIC_RUNTIME    OFF)
 
@@ -40,6 +41,7 @@ enable_testing()
 
 include_directories(logging)
 include_directories(config)
+include_directories(communication/udp)
 
 add_subdirectory(logging)
 add_subdirectory(config)

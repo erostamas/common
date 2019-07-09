@@ -4,7 +4,7 @@
 #include <list>
 
 #include "IMessageReceiver.h"
-#include "udp/UdpInterface.h"
+#include "UdpInterface.h"
 
 class UdpMessageReceiver : public IMessageReceiver {
 public:
