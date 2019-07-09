@@ -40,6 +40,7 @@ enable_testing()
 
 include_directories(logging)
 include_directories(config)
+include_directories(communication/udp)
 
 add_subdirectory(logging)
 add_subdirectory(config)
