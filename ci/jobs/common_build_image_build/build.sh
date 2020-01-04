@@ -2,6 +2,7 @@
 
 echo "Building common build image for ubuntu"
 
+BRANCH_NAME=$1
 SUCCESS=0
 
 cd $WORKSPACE
