@@ -1,9 +1,15 @@
 #/bin/bash
 
+set -e
+
 echo "Building common build image for ubuntu"
+
+echo "Environment variables:"
 env
+
 BRANCH_NAME=$1
-echo "Branch is: $BRANCH_NAME"
+echo "Branch name is: $BRANCH_NAME"
+
 export WORKSPACE="${WORKSPACE:-$(pwd)}"
 SUCCESS=0
 

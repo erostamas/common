@@ -13,6 +13,7 @@ freeStyleJob(jobname) {
     }
     parameters {
         stringParam('GERRIT_REFSPEC', "refs/heads/${BRANCH_NAME}", '"Build Now" workaround')
+        stringParam('BRANCH_NAME', "${BRANCH_NAME}", 'Make BRANCH_NAME available in the job scripts')
     }
     concurrentBuild()
     scm {
