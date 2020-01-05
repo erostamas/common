@@ -1,7 +1,7 @@
 #/bin/bash
 
 echo "Building common build image for ubuntu"
-
+env
 BRANCH_NAME=$1
 echo "Branch is: $BRANCH_NAME"
 export WORKSPACE="${WORKSPACE:-$(pwd)}"
