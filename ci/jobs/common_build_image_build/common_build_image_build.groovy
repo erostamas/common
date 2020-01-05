@@ -49,7 +49,7 @@ freeStyleJob(jobname) {
                                 'compareType'('ANT')
                             }
                             'com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.FilePath' {
-                                'pattern'('ci/jobs/common_build_image_build/main.sh')
+                                'pattern'('ci/jobs/common_build_image_build/build.sh')
                                 'compareType'('PLAIN')
                             }
                         }
