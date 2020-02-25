@@ -1,11 +1,12 @@
 FROM ubuntu:latest
 MAINTAINER Tamas Eros (tamas.eros1@gmail.com)
 
-RUN apt-get update
-RUN apt-get install -y build-essential \
+RUN apt-get update && apt-get install -y build-essential \
                        git \
                        cmake \
-                       libboost-all-dev \
+                       libboost-log-dev \
+                       libboost-system-dev \
+                       libboost-thread-dev \
                        google-mock
 
 # Build and install gmock libraries from source
