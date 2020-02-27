@@ -11,7 +11,7 @@ export WORKSPACE="${WORKSPACE:-$(pwd)}"
 SUCCESS=0
 
 cd $WORKSPACE/common/
-BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+BRANCH=${GERRIT_BRANCH:-$(git rev-parse --abbrev-ref HEAD)}
 echo "Branch name is: $BRANCH_NAME"
 
 cd $WORKSPACE
