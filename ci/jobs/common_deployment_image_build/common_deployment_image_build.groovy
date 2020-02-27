@@ -1,11 +1,11 @@
 import groovy.json.*
 
-def jobname = "common_build_image_build_${BRANCH_NAME}"
+def jobname = "common_deployment_image_build_${BRANCH_NAME}"
 
 freeStyleJob(jobname) {
     description("""
         <b>Generated Job</b>
-        <p>Common library build image build
+        <p>Common library deployment image build
     """.stripIndent().trim())
     logRotator{
         numToKeep(10)
@@ -42,19 +42,6 @@ freeStyleJob(jobname) {
             configure { gerrit ->
                 gerrit / serverName('Gerrithub')
                 gerrit / silentStartMode(true)
-                gerrit / 'gerritProjects' /
-                    'com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.GerritProject' << {
-                        'filePaths' {
-                            'com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.FilePath' {
-                                'pattern'('env/buildenv/**')
-                                'compareType'('ANT')
-                            }
-                            'com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.FilePath' {
-                                'pattern'('ci/jobs/common_build_image_build/build.sh')
-                                'compareType'('PLAIN')
-                            }
-                        }
-                    }
             }
         }
     }
@@ -67,7 +54,7 @@ freeStyleJob(jobname) {
     }
     steps{
         shell('''
-            ${WORKSPACE}/common/ci/jobs/common_build_image_build/build.sh
+            ${WORKSPACE}/common/ci/jobs/common_deployment_image_build/build.sh
         '''.stripIndent().trim())
     }
 }
