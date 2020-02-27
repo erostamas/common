@@ -7,11 +7,12 @@ echo "Building common build image for ubuntu"
 echo "Environment variables:"
 env
 
-BRANCH_NAME=$1
-echo "Branch name is: $BRANCH_NAME"
-
 export WORKSPACE="${WORKSPACE:-$(pwd)}"
 SUCCESS=0
+
+cd $WORKSPACE/common/
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+echo "Branch name is: $BRANCH_NAME"
 
 cd $WORKSPACE
 docker build -t erostamas/common_build_ubuntu_$BRANCH_NAME $WORKSPACE/common/env/buildenv/ubuntu/
