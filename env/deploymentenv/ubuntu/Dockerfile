@@ -7,3 +7,5 @@ WORKDIR /repos/common/
 RUN env/buildenv/ubuntu/build.sh
 WORKDIR /repos/common/build/
 RUN make install
+
+ENV LD_LIBRARY_PATH="/lib:/usr/lib:/usr/local/lib:/usr/lib/erostamas"
