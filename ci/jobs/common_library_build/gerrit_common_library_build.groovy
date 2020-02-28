@@ -13,26 +13,11 @@ freeStyleJob(jobname) {
     }
     parameters {
         stringParam('GERRIT_REFSPEC', "refs/heads/${BRANCH_NAME}", '"Build Now" workaround')
+        stringParam('BRANCH_NAME', "${BRANCH_NAME}", 'Make BRANCH_NAME available in the job scripts')
     }
     concurrentBuild()
     scm {
-        git {
-            remote{
-                url("ssh://erostamas@review.gerrithub.io:29418/erostamas/common")
-                refspec('$GERRIT_REFSPEC')
-                credentials('d15a0909-bacf-4de1-a358-0768d2cf8b33')
-            }
-            branch("${BRANCH_NAME}")
-            extensions{
-                choosingStrategy {
-                    gerritTrigger()
-                }
-                cleanBeforeCheckout()
-                relativeTargetDirectory('common')
-            }
-        }
-    }
-    triggers {
+        git {/var/lib/jenkins/workspace/gerrit_common_library_build_master
         gerrit {
             project('erostamas/common', "${BRANCH_NAME}")
             events {

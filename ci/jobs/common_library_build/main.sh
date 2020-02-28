@@ -1,6 +1,6 @@
 #/bin/bash
 
-echo "Building common library"
+echo "Building common library as user: $USER"
 
 echo "Environment variables:"
 env
