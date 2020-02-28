@@ -1,5 +1,7 @@
 #/bin/bash
 
+cd $(dirname $0)/..
+
 ROOT_DIR=$(git rev-parse --show-toplevel)
 BRANCH_NAME=${BRANCH_NAME:-$(git rev-parse --abbrev-ref HEAD)}
 IMAGE_NAME="erostamas/common_build_ubuntu_$BRANCH_NAME"
