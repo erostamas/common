@@ -2,7 +2,7 @@
 
 set -e
 
-echo "Building common build image for ubuntu"
+echo "Building common build image for ubuntu as user: $USER"
 
 echo "Environment variables:"
 env
@@ -11,7 +11,7 @@ export WORKSPACE="${WORKSPACE:-$(pwd)}"
 SUCCESS=0
 
 cd $WORKSPACE/common/
-BRANCH_NAME=${GIT_BRANCH:-$(git rev-parse --abbrev-ref HEAD)}
+BRANCH_NAME=${BRANCH_NAME:-$(git rev-parse --abbrev-ref HEAD)}
 echo "Branch name is: $BRANCH_NAME"
 
 cd $WORKSPACE
