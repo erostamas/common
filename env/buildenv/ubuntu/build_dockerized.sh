@@ -9,6 +9,7 @@ IMAGE_NAME="erostamas/common_build_ubuntu_$BRANCH_NAME"
 echo "Building in image: $IMAGE_NAME"
 
 
-CMD="/workspace/common/env/buildenv/ubuntu/build.sh && chown -R $UID:$UID /workspace/common/build/*"
+CMD="/workspace/common/env/buildenv/ubuntu/build.sh && chown -R $(id -u):$(id -g) /workspace/common/build/"
+echo "Executing in docker container: $CMD"
 docker pull "$IMAGE_NAME"
 docker run -v $ROOT_DIR:/workspace/common "$IMAGE_NAME" /bin/bash -c "$CMD"
