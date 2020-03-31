@@ -2,7 +2,7 @@
 
 set -e
 
-echo "Building common build image for ubuntu as user: $USER"
+echo "Building common build image for ubuntu and raspbian as user: $USER"
 
 echo "Environment variables:"
 env
@@ -19,7 +19,12 @@ docker build -t erostamas/common_build_ubuntu_$BRANCH_NAME $WORKSPACE/common/env
 docker login --username=erostamas --password 749af946-ad0c-4d57-ade7-dfcc06efb7e4 docker.io
 docker push erostamas/common_build_ubuntu_$BRANCH_NAME:latest
 
+cd $WORKSPACE
+docker build -t erostamas/common_build_raspbian_$BRANCH_NAME $WORKSPACE/common/env/buildenv/raspbian/
+docker login --username=erostamas --password 749af946-ad0c-4d57-ade7-dfcc06efb7e4 docker.io
+docker push erostamas/common_build_raspbian_$BRANCH_NAME:latest
+
 SUCCESS=$?
-echo "Done building common build image for ubuntu"
+echo "Done building common build image for ubuntu and raspbian"
 
 return $SUCCESS
