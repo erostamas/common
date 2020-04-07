@@ -9,7 +9,7 @@ class TestMessageReceiver : public IMessageReceiver {
 public:
     TestMessageReceiver();
 
-    virtual std::list<const char*> getMessages() override;
+    virtual std::list<Message> getMessages() override;
 
-    std::list<const char*> _messages;
+    std::list<Message> _messages;
 };
