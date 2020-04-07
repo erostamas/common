@@ -5,13 +5,14 @@
 
 #include "IMessageReceiver.h"
 #include "UdpInterface.h"
+#include "Message.h"
 
 class UdpMessageReceiver : public IMessageReceiver {
 public:
     UdpMessageReceiver(unsigned listenPort);
 
-    virtual std::list<const char*> getMessages() override;
+    virtual std::list<Message> getMessages() override;
 
 private:
-    std::unique_ptr<UdpInterface> _udpInterface = nullptr;
+    std::unique_ptr<UdpReceiver> _udpReceiver = nullptr;
 };

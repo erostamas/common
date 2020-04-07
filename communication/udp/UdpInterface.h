@@ -4,6 +4,7 @@
 #include <thread>
 #include <mutex>
 #include <memory>
+#include <boost/asio.hpp>
 
 #include "UdpReceiver.h"
 
@@ -12,20 +13,21 @@ public:
     UdpInterface(unsigned listenPort);
 
     void sendTo(const std::string& ipAddress
-              , unsigned port
+              , unsigned targetPort
               , const char* message
               , std::size_t length);
     void sendTo(const std::string& ipAddress
-              , unsigned port
+              , unsigned targetPort
               , std::string message);
-    void startReceiveThread();
-    void receiveThread();
-    std::list<const char*> getMessages();
+    void sendTo(boost::asio::ip::udp::endpoint remoteEndpoint
+              , std::string message);
+    std::list<Message> getMessages();
 
 private:
+    std::shared_ptr<boost::asio::io_service> _ioService;
+    std::shared_ptr<boost::asio::ip::udp::socket> _socket;
     unsigned _listenPort = 0;
-    std::thread _receiveThread;
-    std::unique_ptr<UdpReceiver> _receiver = nullptr;
+    UdpReceiver _receiver;
 };
 
 using UdpInterfacePtr = std::unique_ptr<UdpInterface>;
