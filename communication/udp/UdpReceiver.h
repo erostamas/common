@@ -3,22 +3,29 @@
 #include <boost/asio.hpp>
 #include <list>
 #include <mutex>
+#include <thread>
+
+#include "Message.h"
 
 class UdpReceiver {
 public:
-    UdpReceiver(boost::asio::io_service& io_service, unsigned listenPort);
+    UdpReceiver(unsigned listenPort, std::shared_ptr<boost::asio::ip::udp::socket> socket = nullptr, std::shared_ptr<boost::asio::io_service> ioService = nullptr);
     ~UdpReceiver();
 
-    std::list<const char*> getMessages();
+    std::list<Message> getMessages();
 private:
+    void receiveThread();
+    void startReceiveThread();
     void startReceive();
     void handleReceive(const boost::system::error_code& error
                      , std::size_t bytes_transferred);
-    void handleDiscoveryMessage();
 
-    boost::asio::ip::udp::socket _socket;
+    std::shared_ptr<boost::asio::io_service> _ioService;
+    std::shared_ptr<boost::asio::ip::udp::socket> _socket;
     boost::asio::ip::udp::endpoint _remoteEndpoint;
     std::array<char, 1024> _recvBuffer;
-    std::list<const char*> _messages;
+    std::list<Message> _messages;
     std::mutex _messageContainerMutex;
+    std::thread _receiveThread;
+    int _listenPort;
 };

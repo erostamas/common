@@ -1,10 +1,9 @@
 #include "UdpMessageReceiver.h"
 
 UdpMessageReceiver::UdpMessageReceiver(unsigned listenPort) {
-    _udpInterface = std::unique_ptr<UdpInterface>(new UdpInterface(listenPort));
-    _udpInterface->startReceiveThread();
+    _udpReceiver = std::unique_ptr<UdpReceiver>(new UdpReceiver(listenPort));
 }
 
-std::list<const char*> UdpMessageReceiver::getMessages() {
-    return _udpInterface->getMessages();
+std::list<Message> UdpMessageReceiver::getMessages() {
+    return _udpReceiver->getMessages();
 }
