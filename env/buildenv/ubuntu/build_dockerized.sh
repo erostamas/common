@@ -10,6 +10,16 @@ echo "Building in image: $IMAGE_NAME"
 
 
 CMD="/workspace/common/env/buildenv/ubuntu/build.sh && chown -R $(id -u):$(id -g) /workspace/common/build/"
+
+
 echo "Executing in docker container: $CMD"
 docker pull "$IMAGE_NAME"
 docker run -v $ROOT_DIR:/workspace/common "$IMAGE_NAME" /bin/bash -c "$CMD"
+success=$?
+
+if [[ $success == 0 ]]; then
+    echo "Execution OK"
+else
+    echo "Execution failed"
+
+exit ${success}
