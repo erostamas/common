@@ -12,7 +12,7 @@ public:
         std::vector<CommandPtr> ret;
         for (const auto& receiver : _messageReceivers) {
             for (const auto& message : receiver->getMessages()) {
-                ret.push_back(std::move(convertMessage(message)));
+                ret.push_back(std::move(convertMessage(message.getMessageContent().c_str())));
             }
         }
         return ret;

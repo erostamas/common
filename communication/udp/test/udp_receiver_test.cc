@@ -1,13 +1,12 @@
 #include <iostream>
 
-#include "UdpInterface.h"
+#include "UdpReceiver.h"
 #include "Logging.h"
 
 int main() {
     std::string x = "DEBUG";
     init_logging(std::cout, x);
-    UdpInterface udpInterface(50001);
-    udpInterface.startReceiveThread();
+    UdpReceiver udpReceiver(50001);
     while(true) {
     }
     return 0;

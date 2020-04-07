@@ -3,6 +3,6 @@
 TestMessageReceiver::TestMessageReceiver() {
 }
 
-std::list<const char*> TestMessageReceiver::getMessages() {
+std::list<Message> TestMessageReceiver::getMessages() {
     return _messages;
 }
