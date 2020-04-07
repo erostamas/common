@@ -5,19 +5,22 @@
 #include "Logging.h"
 #include "UdpSender.h"
 
-UdpReceiver::UdpReceiver(boost::asio::io_service& io_service, unsigned listenPort)
-    : _socket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), listenPort)) {
-        startReceive();
+UdpReceiver::UdpReceiver(unsigned listenPort, std::shared_ptr<boost::asio::ip::udp::socket> socket, std::shared_ptr<boost::asio::io_service> ioService)
+: _ioService(ioService == nullptr ? std::make_shared<boost::asio::io_service>() : ioService)
+, _socket(socket == nullptr ? std::make_shared<boost::asio::ip::udp::socket>(*_ioService, boost::asio::ip::udp::endpoint(boost::asio::ip::address::from_string("0.0.0.0"), listenPort)) : socket)
+, _listenPort(listenPort) {
+    startReceiveThread();
 }
 
 UdpReceiver::~UdpReceiver() {
-    for (auto m : _messages) {
-        delete[] m;
-    }
+}
+
+void UdpReceiver::startReceiveThread() {
+    _receiveThread = std::thread(&UdpReceiver::receiveThread, this);
 }
 
 void UdpReceiver::startReceive() {
-    _socket.async_receive_from(boost::asio::buffer(_recvBuffer)
+    _socket->async_receive_from(boost::asio::buffer(_recvBuffer)
                              , _remoteEndpoint
                              , boost::bind(&UdpReceiver::handleReceive
                                         , this
@@ -29,22 +32,16 @@ void UdpReceiver::startReceive() {
 void UdpReceiver::handleReceive(const boost::system::error_code& error
                               , std::size_t bytes_transferred) {
         if (!error || error == boost::asio::error::message_size) {
-            char* msg = new char[bytes_transferred + 1];
-            strncpy(msg, _recvBuffer.data(), bytes_transferred);
-            msg[bytes_transferred] = '\0';
-            LOG_DEBUG << "[UdpReceiver] Received message: " << msg;
-            if (strcmp(msg, "where are you brewer?") == 0) {
-                handleDiscoveryMessage();
-            } else {
-                _messageContainerMutex.lock();
-                _messages.push_back(msg);
-                _messageContainerMutex.unlock();
-            }
+            std::string msg(std::string(_recvBuffer.data(), bytes_transferred));
+            LOG_DEBUG << "[UdpReceiver] Received message: '" << msg << "' from: '" << _remoteEndpoint << "'";
+            _messageContainerMutex.lock();
+            _messages.emplace_back(msg, _remoteEndpoint.address(), _remoteEndpoint.port());
+            _messageContainerMutex.unlock();
         }
         startReceive();
 }
 
-std::list<const char*> UdpReceiver::getMessages() {
+std::list<Message> UdpReceiver::getMessages() {
     _messageContainerMutex.lock();
     auto tmp = _messages;
     _messages.clear();
@@ -52,8 +49,12 @@ std::list<const char*> UdpReceiver::getMessages() {
     return tmp;
 }
 
-void UdpReceiver::handleDiscoveryMessage() {
-    UdpSender sender(_remoteEndpoint);
-    std::string msg = "right here!";
-    sender.send(msg);
+void UdpReceiver::receiveThread() {
+    try {
+        LOG_INFO << "[UdpInterface] Listening on port: " << _listenPort;
+        startReceive();
+        _ioService->run();
+    } catch (const std::exception& ex) {
+        LOG_ERROR << "[UdpInterface] Exception on receive thread: " << ex.what() << std::endl;
+    }
 }
