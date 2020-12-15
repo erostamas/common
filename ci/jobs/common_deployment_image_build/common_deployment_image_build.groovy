@@ -21,7 +21,7 @@ freeStyleJob(jobname) {
             remote{
                 url("ssh://erostamas@review.gerrithub.io:29418/erostamas/common")
                 refspec('$GERRIT_REFSPEC')
-                credentials('d15a0909-bacf-4de1-a358-0768d2cf8b33')
+                credentials('33782a32-8ca5-49a6-9808-3f634b6f4972')
             }
             branch("${BRANCH_NAME}")
             extensions{
