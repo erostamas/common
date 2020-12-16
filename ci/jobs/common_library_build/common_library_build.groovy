@@ -55,6 +55,7 @@ freeStyleJob(jobname) {
         }
     }
     wrappers {
+        preBuildCleanup()
         timeout {
             absolute(60)
         }
