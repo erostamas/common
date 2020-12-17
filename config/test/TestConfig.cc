@@ -5,7 +5,7 @@
 
 static constexpr const char* TEST_CONFIG_1 = R"(
 {
-    "stringkey2": "value",
+    "stringkey": "value",
     "integerkey": 100,
     "boolkey": true
 }
@@ -14,7 +14,7 @@ static constexpr const char* TEST_CONFIG_1 = R"(
 TEST(TestConfig, test_simple_values) {
     std::istringstream iss(TEST_CONFIG_1);
     Config cfg(iss);
-    EXPECT_EQ("value", cfg.get("stringkey2", std::string("default_value")));
+    EXPECT_EQ("value", cfg.get("stringkey", std::string("default_value")));
     EXPECT_EQ(100, cfg.get("integerkey", 0));
     EXPECT_EQ(true, cfg.get("boolkey", false));
 }
