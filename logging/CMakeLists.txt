@@ -17,7 +17,3 @@ INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/Logging.h
 	DESTINATION /usr/include/erostamas/
 	PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
 )
-
-add_subdirectory(test)
-
-enable_testing()
