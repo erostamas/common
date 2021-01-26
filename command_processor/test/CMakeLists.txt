@@ -8,9 +8,10 @@ add_executable(${TESTNAME}
     TestStringCommandAdapter.cc)
 
 target_link_libraries(${TESTNAME}
+    gmock_main
     gmock
-	gmock_main
-	pthread
-	et_command_processor)
+    gtest
+    pthread
+    et_command_processor)
 
 ADD_TEST(${TESTNAME} ${CMAKE_CURRENT_BINARY_DIR}/${TESTNAME})
