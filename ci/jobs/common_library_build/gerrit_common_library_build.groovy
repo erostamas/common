@@ -84,7 +84,7 @@ freeStyleJob(jobname) {
                     'common/build/command_processor/libet_command_processor.so, ' +
                     'common/command_processor/*.h, ' +
 					'common/build/config/libet_config.so, ' +
-                    'common/config/Config.h ' +
+                    'common/config/Config.h, ' +
                     'common/build/erostamas_common.deb')
         }
     }
