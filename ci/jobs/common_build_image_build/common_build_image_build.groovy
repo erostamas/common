@@ -67,7 +67,7 @@ freeStyleJob(jobname) {
     }
     steps{
         shell('''
-            ${WORKSPACE}/common/ci/jobs/common_build_image_build/build.sh
+            ${WORKSPACE}/common/ci/jobs/common_build_image_build/build.sh ubuntu
         '''.stripIndent().trim())
     }
 }
