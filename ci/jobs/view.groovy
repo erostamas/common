@@ -8,7 +8,6 @@ sectionedView("common_${BRANCH_NAME}") {
             jobs {
                 name("common_library_build_${BRANCH_NAME}")
                 name("common_build_image_build_${BRANCH_NAME}")
-                name("common_deployment_image_build_${BRANCH_NAME}")
             }
             columns {
                 status()
