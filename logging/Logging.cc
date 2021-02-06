@@ -29,10 +29,11 @@ BOOST_LOG_GLOBAL_LOGGER_INIT(global_logger, src::logger) {
     return _logger;
 }
 
-void init_logging(const std::string& logFilePath, const std::string& logLevelStr) {
+void init_logging(const std::string& logFilePath, const std::string& logLevelStr, uint64_t rotationSize) {
     boost::log::add_common_attributes();
     boost::log::add_file_log(
 			keywords::file_name = logFilePath,
+            keywords::rotation_size = rotationSize,
             keywords::open_mode = (std::ios::out | std::ios::app),
             keywords::auto_flush = true,
             keywords::format = (
