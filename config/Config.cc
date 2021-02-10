@@ -3,7 +3,11 @@
 #include "Config.h"
 
 Config::Config(const std::string filePath) {
-    pt::read_json(filePath, _root);
+    try {
+        pt::read_json(filePath, _root);
+    } catch (const std::exception& e) {
+        LOG_ERROR << "[Config] Failed to parse config file: " << filePath << ", reason: '" << e.what() << "'";
+    }
 }
 
 Config::Config(std::istringstream& configStr) {

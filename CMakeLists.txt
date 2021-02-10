@@ -47,6 +47,7 @@ add_subdirectory(config)
 add_subdirectory(communication)
 add_subdirectory(command_processor)
 add_subdirectory(etc)
+add_subdirectory(test)
 #add_subdirectory(avro)
 
 SET(CPACK_PACKAGE_VERSION_MAJOR 0)
