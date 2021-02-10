@@ -42,7 +42,7 @@ void init_logging(const std::string& logFilePath, const std::string& logLevelStr
                 << " [" << expr::attr<severity_level>("Severity") << "]: "
                 << expr::smessage));
 
-    LOG_INFO << "log initialized with log level: " << logLevelStr;
+    LOG_INFO << "log initialized with log level: " << logLevelStr << ", rotation size set to: " << rotationSize << " bytes";
     boost::log::core::get()->set_filter(severity >= logLevels.at(logLevelStr));
 }
 
