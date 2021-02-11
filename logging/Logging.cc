@@ -29,10 +29,10 @@ BOOST_LOG_GLOBAL_LOGGER_INIT(global_logger, src::logger) {
     return _logger;
 }
 
-void init_logging(const std::string& logFilePath, const std::string& logLevelStr, uint64_t rotationSize) {
+void init_logging(const std::string& logFilePath, const std::string& logFileName, const std::string& logLevelStr, uint64_t rotationSize, uint64_t maxSize) {
     boost::log::add_common_attributes();
     boost::log::add_file_log(
-			keywords::file_name = logFilePath,
+			keywords::file_name = logFilePath + "/" + logFileName,
             keywords::rotation_size = rotationSize,
             keywords::open_mode = (std::ios::out | std::ios::app),
             keywords::auto_flush = true,
@@ -40,7 +40,13 @@ void init_logging(const std::string& logFilePath, const std::string& logLevelStr
                 expr::stream
                 << expr::format_date_time<boost::posix_time::ptime>("TimeStamp", "%Y-%m-%d %H:%M:%S.%f")
                 << " [" << expr::attr<severity_level>("Severity") << "]: "
-                << expr::smessage));
+                << expr::smessage)
+    )->locked_backend()->set_file_collector
+        ( boost::log::sinks::file::make_collector
+            ( keywords::target = logFilePath,
+              keywords::max_size = maxSize
+            )
+        );
 
     LOG_INFO << "log initialized with log level: " << logLevelStr << ", rotation size set to: " << rotationSize << " bytes";
     boost::log::core::get()->set_filter(severity >= logLevels.at(logLevelStr));
